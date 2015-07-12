@@ -1,42 +1,42 @@
 #include <stdio.h>
 #include <string.h>
 
-void exchange(int *data1, int *data2)
-{
-    assert(data1);
-    assert(data2);
-}
+#define EXCHANGE(data1, data2)  do {\
+        (data1) = (data1) ^ (data2);\
+        (data2) = (data1) ^ (data2);\
+        (data1) = (data1) ^ (data2);\
+    }while(0)
 
-int *bubbleSort(int array[], unsigned int len)
+void bubblesort(int array[], unsigned int len)
 {
     assert(array);
     int i = 0;
     int j = 0;
-
     for (i = 0; i < len - 1; i++) {
         for(j = 0; j < len - i - 1; j++) {
             /*ascending order*/
             if (array[j + 1] < array[j]) {
-                exchange(&array[j], &array[j + 1]);
+                EXCHANGE(array[j], array[j + 1]);
             }
         }
     }
 }
 
-int *insertSort(int array[], int len)
+void insertsort(int array[], unsigned int len)
 {
     assert(array);
     int i = 0;
     int j = 0;
     int key = 0;
-    
-    for (i = 0; i < len - 1; i++) {
-        key = array[i];
-        for (j = 0; j < len - i - 1; j++) {
 
+    for (i = 1; i < len; i++) {
+        key = array[i]
+        for (j = 0; j < i + 1; j++) {
+            if (key < array[j]) {
+                EXCHANGE(array[j], key);
+            }
         }
     }
-
 }
 
 int partition(int array[], unsigned int start, unsigned int end)
@@ -46,13 +46,13 @@ int partition(int array[], unsigned int start, unsigned int end)
     unsigned int key = array[end]; 
     for (i = start; i < end; i++) {
         if (array[i] < key) {
-            exchange(&array[i], &array[index++]);
+           EXCHANGE(array[i], array[index++]);
         }
     } 
-    exchange(&array[index], &array[end]);
+    EXCHANGE(array[index], array[end]);
     return index;
 }
-int *quickSort(int array[], unsigned int start, unsigned int end)
+void quickSort(int array[], unsigned int start, unsigned int end)
 {
     unsigned int middle = 0;
     assert(array);
