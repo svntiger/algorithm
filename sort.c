@@ -7,6 +7,29 @@
         (data1) = (data1) ^ (data2);\
     }while(0)
 
+
+static int partition(int array[], unsigned int start, unsigned int end)
+{
+    unsigned int i = 0;
+    unsigned int index = start;
+    unsigned int key = array[end]; 
+    for (i = start; i < end; i++) {
+        if (array[i] < key) {
+           EXCHANGE(array[i], array[index++]);
+        }
+    } 
+    EXCHANGE(array[index], array[end]);
+    return index;
+}
+void quickSort(int array[], unsigned int start, unsigned int end)
+{
+    unsigned int middle = 0;
+    assert(array);
+    middle = partition(array, start, end);
+    quickSort(array, start, middle - 1); 
+    quickSort(array, middle, end); 
+}
+
 void bubblesort(int array[], unsigned int len)
 {
     assert(array);
@@ -38,26 +61,3 @@ void insertsort(int array[], unsigned int len)
         }
     }
 }
-
-int partition(int array[], unsigned int start, unsigned int end)
-{
-    unsigned int i = 0;
-    unsigned int index = start;
-    unsigned int key = array[end]; 
-    for (i = start; i < end; i++) {
-        if (array[i] < key) {
-           EXCHANGE(array[i], array[index++]);
-        }
-    } 
-    EXCHANGE(array[index], array[end]);
-    return index;
-}
-void quickSort(int array[], unsigned int start, unsigned int end)
-{
-    unsigned int middle = 0;
-    assert(array);
-    middle = partition(array, start, end);
-    quickSort(array, start, middle - 1); 
-    quickSort(array, middle, end); 
-}
-
